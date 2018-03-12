@@ -16,7 +16,7 @@ module DatasetsHelper
            else
              '/dataset/edit/'
            end
-    url += dataset.legacy_name
+    url += dataset.legacy_name || ""
     url.to_s
   end
 

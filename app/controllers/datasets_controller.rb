@@ -2,7 +2,7 @@ class DatasetsController < ApplicationController
   include DatasetsHelper
 
   def show
-    @dataset = Dataset.get_by_uuid(uuid: params[:uuid])
+    @dataset = Dataset.from_content_store("/dataset/#{params[:uuid]}/#{params[:name]}")
     @timeseries_datafiles = @dataset.timeseries_datafiles
     @non_timeseries_datafiles = @dataset.non_timeseries_datafiles
     @referer_query = referer_query

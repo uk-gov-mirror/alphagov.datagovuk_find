@@ -29,6 +29,7 @@ gem 'lograge', '~> 0.7'
 gem 'logstash-event', '~> 1.2'
 gem 'zendesk_api'
 gem 'parslet'
+gem 'gds-api-adapters'
 
 group :development, :test do
   gem 'byebug', '~> 9'

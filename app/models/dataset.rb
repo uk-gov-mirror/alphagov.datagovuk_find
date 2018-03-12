@@ -1,3 +1,5 @@
+require 'gds_api/content_store'
+
 class Dataset
   include ActiveModel::Model
   include Elasticsearch::Model
@@ -32,13 +34,24 @@ class Dataset
       .first || raise(DatasetNotFound)
   end
 
+  def self.content_store
+    @content_store ||= GdsApi::ContentStore.new(Plek.current.find("content-store"))
+  end
+
+  def self.from_content_store(content_item_path)
+    item = content_store.content_item(content_item_path)
+    attrs = item.to_h.slice("title", "description").merge(item["details"]).except("change_history").merge("last_updated_at" => item["public_updated_at"], "uuid" => item["content_id"])
+    Dataset.new(attrs)
+  end
+
   def self.get_by_legacy_name(legacy_name:)
     get_by_query(query: Search::Query.by_legacy_name(legacy_name))
       .first || raise(DatasetNotFound)
   end
 
   def self.related(id)
-    get_by_query(query: Search::Query.related(id))
+    # get_by_query(query: Search::Query.related(id))
+    []
   end
 
   def self.locations
