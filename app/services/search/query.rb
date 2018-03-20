@@ -1,6 +1,7 @@
 module Search
   class Query
-    MULTI_MATCH_FIELDS = %w(title summary description organisation^2 location*^2)
+    MULTI_MATCH_FIELDS = %w(title summary description location*^2)
+    MULTI_MATCH_FIELDS_ENGLISH = %w(title.english^2 summary.english description.english)
     TERMS_SIZE = 10_000
 
     attr_accessor :clauses
@@ -182,6 +183,20 @@ module Search
       query[:query][:bool][:must] << format_filter(format_param)       if format_param.present?
       query[:query][:bool][:must] << licence_filter(licence_param)     if licence_param.present?
 
+      # If we have a must clause then a dataset will match the bool query even
+      # if none of the should queries match. If the must clause is empty at
+      # least one of the should queries must match a dataset for it to match
+      # the bool query. Therefore we can only include the should clause if we
+      # have a must clause also set otherwise we'll only get datasets we boost.
+      if query[:query][:bool][:must].any?
+        query[:query][:bool][:should] ||= []
+        query[:query][:bool][:should] << organisation_title_filter(query_param, boost: 1)
+        query[:query][:bool][:should] << organisation_category_filter('ministerial-department', boost: 2)
+        query[:query][:bool][:should] << organisation_category_filter('non-ministerial-department', boost: 2)
+        query[:query][:bool][:should] << organisation_category_filter('executive-ndpb', boost: 2)
+        query[:query][:bool][:should] << organisation_category_filter('local-council', boost: 1)
+      end
+
       query[:sort] = { "last_updated_at": { "order": "desc" } } if sort_param == "recent"
 
       query
@@ -284,6 +299,39 @@ module Search
       }
     end
 
+    def self.organisation_category_filter(organisation_category, boost: 2)
+      {
+        nested: {
+          path: 'organisation',
+          query: {
+            term: {
+              'organisation.category.keyword' => {
+                value: organisation_category,
+                boost: boost
+              }
+            }
+          }
+        }
+      }
+    end
+
+    def self.organisation_title_filter(organisation_title, boost: 2)
+      {
+        nested: {
+          path: 'organisation',
+          query: {
+            match: {
+              "organisation.title.english" => {
+                query: organisation_title,
+                analyzer: 'english',
+                boost: boost,
+              },
+            },
+          },
+        },
+      }
+    end
+
     private_class_method :publisher_filter, :topic_filter, :location_filter, :format_filter, :licence_filter
 
     private
@@ -303,7 +351,8 @@ module Search
       {
         multi_match: {
           query: terms,
-          fields: MULTI_MATCH_FIELDS,
+          fields: MULTI_MATCH_FIELDS_ENGLISH,
+          analyzer: 'english',
         }
       }
     end

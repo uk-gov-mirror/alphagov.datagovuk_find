@@ -202,6 +202,85 @@ feature 'Search page', elasticsearch: true do
     )
   end
 
+  scenario 'Searching with a plural query' do
+    index(DatasetBuilder.new.with_title('Maps').build)
+
+    search_for('Map')
+
+    assert_search_results_headings('Maps')
+  end
+
+  scenario 'Search with a possessive query' do
+    index(DatasetBuilder.new.with_title('Government').build)
+
+    search_for("Government's")
+
+    assert_search_results_headings('Government')
+  end
+
+  scenario 'Search with lowercase query' do
+    index(DatasetBuilder.new.with_title('DEFRA').build)
+
+    search_for("defra")
+
+    assert_search_results_headings('DEFRA')
+  end
+
+  scenario 'Prominence of datasets based on organisation category' do
+    ministerial_dataset = DatasetBuilder
+                            .new
+                            .with_ministerial_department(
+                              'Department for Environment Food & Rural Affairs'
+                            )
+                            .build
+
+    non_ministerial_dataset = DatasetBuilder
+                                .new
+                                .with_non_ministerial_department(
+                                  'Forestry Commission'
+                                )
+                                .build
+
+    local_council_dataset = DatasetBuilder
+                              .new
+                              .with_local_council(
+                                'Plymouth City Council'
+                              )
+                              .build
+
+    non_departmental_public_body_dataset = DatasetBuilder
+                                             .new
+                                             .with_non_departmental_public_body(
+                                               'English Heritage'
+                                             )
+                                             .build
+
+    index(
+      ministerial_dataset,
+      non_ministerial_dataset,
+      local_council_dataset,
+      non_departmental_public_body_dataset
+    )
+
+    search_for('data')
+
+    publishers = all('dd.published_by').map(&:text)
+
+    expect(publishers[0]).to eq('Department for Environment Food & Rural Affairs')
+                               .or eq('English Heritage')
+                                     .or eq('Forestry Commission')
+
+    expect(publishers[1]).to eq('Department for Environment Food & Rural Affairs')
+                               .or eq('English Heritage')
+                                     .or eq('Forestry Commission')
+
+    expect(publishers[2]).to eq('Department for Environment Food & Rural Affairs')
+                               .or eq('English Heritage')
+                                     .or eq('Forestry Commission')
+
+    expect(publishers[3]).to eq('Plymouth City Council')
+  end
+
   def assert_data_set_length_is(count)
     datasets = all('h2 a')
     expect(datasets.length).to be(count)

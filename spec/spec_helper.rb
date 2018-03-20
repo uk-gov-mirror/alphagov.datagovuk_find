@@ -67,6 +67,7 @@ end
 
 def index_settings
   {
+    number_of_shards: 1, # necessary so our relevance specs work (more info: https://www.elastic.co/guide/en/elasticsearch/guide/current/relevance-is-broken.html)
     analysis: {
       normalizer: {
         lowercase_normalizer: {
@@ -85,6 +86,45 @@ def index_mappings
         name: {
           type: "keyword",
           index: true,
+        },
+        title: {
+          type: 'text',
+          fields: {
+            keyword: {
+              type: 'keyword',
+              index: true,
+            },
+            english: {
+              type: 'text',
+              analyzer: 'english',
+            },
+          },
+        },
+        summary: {
+          type: 'text',
+          fields: {
+            keyword: {
+              type: 'keyword',
+              index: true,
+            },
+            english: {
+              type: 'text',
+              analyzer: 'english',
+            },
+          },
+        },
+        description: {
+          type: 'text',
+          fields: {
+            keyword: {
+              type: 'keyword',
+              index: true,
+            },
+            english: {
+              type: 'text',
+              analyzer: 'english',
+            },
+          },
         },
         legacy_name: {
           type: "keyword",
@@ -126,9 +166,26 @@ def index_mappings
                 raw: {
                   type: "keyword",
                   index: true,
+                },
+                english: {
+                  type: 'text',
+                  analyzer: 'english',
                 }
               }
-            }
+            },
+            description: {
+              type: 'text',
+              fields: {
+                raw: {
+                  type: 'keyword',
+                  index: true,
+                },
+                english: {
+                  type: 'text',
+                  analyzer: 'english',
+                },
+              },
+            },
           }
         },
         datafiles: {
