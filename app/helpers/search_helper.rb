@@ -36,6 +36,10 @@ module SearchHelper
     params[:q].presence || selected_topic.presence
   end
 
+  def last_updated_at(dataset)
+    dataset.datafile_last_updated_at || dataset.last_updated_at
+  end
+
 private
 
   def no_filters_selected?
