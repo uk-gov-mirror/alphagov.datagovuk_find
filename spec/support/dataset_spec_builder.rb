@@ -49,7 +49,8 @@ class DatasetBuilder
         },
         datafiles: [],
         docs: [],
-        notes: ''
+        notes: '',
+        public_updated_at: '2017-07-24T14:47:25.975Z',
     }
   end
 
