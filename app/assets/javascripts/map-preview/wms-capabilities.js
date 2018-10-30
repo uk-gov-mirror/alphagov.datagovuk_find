@@ -82,7 +82,7 @@ os.WMSCapabilitiesLoader = Ext.extend(GeoExt.tree.WMSCapabilitiesLoader,{
       }
 
       // choose preferred exception format
-      exceptionFormat = "";
+      // exceptionFormat = "xml";
       /* DISABLED DUE TO http://redmine.dguteam.org.uk/issues/1955 */
       /*if (exceptionFormatsArr.indexOf("application/vnd.ogc.se_xml") > -1) {
           exceptionFormat = "application/vnd.ogc.se_xml";
@@ -177,7 +177,7 @@ os.WMSCapabilitiesLoader = Ext.extend(GeoExt.tree.WMSCapabilitiesLoader,{
         if (n.attributes.layer)
         {
           n.attributes.layer.data.INFO_FORMAT = infoFormat;
-          n.attributes.layer.data.EXCEPTIONS = exceptionFormat;
+          n.attributes.layer.data.EXCEPTIONS = this.exceptionFormat;
           n.attributes.layer.data.layer = this.createWMSLayer(el, url);
         }
         node.appendChild(n);

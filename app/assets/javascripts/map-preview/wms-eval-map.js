@@ -1861,7 +1861,7 @@ function buildUI(urls){
         };
     } else {
         childLayerParams = {
-            format: 'image/png', transparent: 'true'
+            format: 'image/png', transparent: 'true', version: '1.3.0'
         };
     }
 
@@ -1880,6 +1880,7 @@ function buildUI(urls){
 
                 // COI
                 url: 'preview_proxy?url=' + urlWmsSuffix,
+                exceptionFormat: 'XML',
 
                 // Ordnance Survey
                 //url: 'preview_proxy?url=' + urlWmsSuffix,
