@@ -1,0 +1,3 @@
+---
+browser: 'chrome'
+configuration_class: '::JasmineSeleniumConfigurer'
