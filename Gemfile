@@ -35,6 +35,8 @@ group :development, :test do
   gem 'brakeman', '~> 4.2'
   gem 'byebug', '~> 9'
   gem 'govuk-lint', '~> 3.8.0'
+  gem 'jasmine'
+  gem 'jasmine_selenium_runner'
   gem 'pry', '~> 0.10'
   gem 'pry-byebug', '~> 3.4'
   gem 'pry-stack_explorer', '~> 0.4.9'
