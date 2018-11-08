@@ -11,6 +11,11 @@
 // about supported directives.
 //
 //= require jquery
+//= require ext-base
+//= require ext-all
+//= require OpenLayers
+//= require GeoExt
+//= require proj4js
 //= require govuk_toolkit
 //= require accessible-autocomplete/dist/accessible-autocomplete.min
 //= require_tree ./organograms/lib
