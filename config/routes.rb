@@ -46,4 +46,6 @@ Rails.application.routes.draw do
   get 'dataset/:dataset_uuid/:name/datafile/:datafile_uuid/preview', to: 'previews#show', as: 'datafile_preview'
 
   get 'acknowledge', to: 'messages#acknowledge'
+
+  get 'metrics', to: 'metrics#show'
 end
