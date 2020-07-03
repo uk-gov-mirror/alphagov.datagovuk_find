@@ -7,6 +7,7 @@ en:
         search_box_label: "Search"
         search_button_label: "Find data"
     topics:
+      topics_heading: "Data topics"
       business_and_economy_label: "Business and economy"
       business_and_economy_description: "Small businesses, industry, imports, exports and trade"
       crime_and_justice_label: "Crime and justice"
