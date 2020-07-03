@@ -5,7 +5,7 @@
 <form action="/search" method="GET">
   <main role="main" id="content">
   <h1 class="heading-large"> <%= t('.search_results_heading') %></h1>
-  <div class="grid-row">
+  <div class="govuk-grid-row">
     <div class="column-two-thirds dgu-search-box">
       <label for="q" class="govuk-visually-hidden"> <%= t('.accessibility.search_box_label') %></label>
       <input id="q"
@@ -19,7 +19,7 @@
     </div>
   </div>
 
-  <div class="grid-row dgu-filters">
+  <div class="govuk-grid-row dgu-filters">
     <div class="column-one-third">
       <%= render 'filters' %>
     </div>
