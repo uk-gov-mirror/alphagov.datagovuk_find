@@ -6,38 +6,35 @@
   end
 %>
 <section class="contact">
-  <h2 class="heading-medium">
+  <h2 class="govuk-heading-m">
     <%= t('datasets.contact.contact') %>
   </h2>
 
-  <% if contact_email_exists?(dataset) %>
-    <div class="column-one-half enquiries">
-      <h3 class="heading-small">
-        <%= t('datasets.contact.enquiries') %>
-      </h3>
-      <p>
-        <%= content_tag(:span, contact_name_for(dataset)) if contact_name_for(dataset).present? %>
-        <%= content_tag(:span, mail) if mail.present? %>
-      </p>
-    </div>
-  <% end %>
+  <div class="govuk-grid-row">
+    <% if contact_email_exists?(dataset) %>
+      <div class="govuk-grid-column-one-half contact__section">
+        <h3 class="govuk-heading-s contact__heading">
+          <%= t('datasets.contact.enquiries') %>
+        </h3>
+        <%= content_tag(:p, contact_name_for(dataset), class: "contact__source") if contact_name_for(dataset).present? %>
+        <%= content_tag(:p, mail, class: "contact__source") if mail.present? %>
+      </div>
+    <% end %>
 
-  <% if foi_details_exist?(dataset) %>
-    <div class="column-one-half foi">
-      <h3 class="heading-small">
-        <%= t('datasets.contact.foi_requests') %>
-      </h3>
+    <% if foi_details_exist?(dataset) %>
+      <div class="govuk-grid-column-one-half contact__section">
+        <h3 class="govuk-heading-s contact__heading">
+          <%= t('datasets.contact.foi_requests') %>
+        </h3>
 
-      <p>
-        <%= content_tag(:span, foi_name_for(dataset)) if foi_name_for(dataset).present? %>
-        <%= content_tag(:span, mail_to(foi_email_for(dataset), nil, {class: 'ga-contact'})) if foi_email_for(dataset).present? %>
+        <%= content_tag(:p, foi_name_for(dataset), class: "contact__source") if foi_name_for(dataset).present? %>
+        <%= content_tag(:p, mail_to(foi_email_for(dataset), nil, {class: 'ga-contact'}), class: "contact__source") if foi_email_for(dataset).present? %>
         <% if foi_web_address_for(dataset).present? %>
-          <%= content_tag(:span) do %>
-            <%= link_to(foi_web_address_for(dataset), foi_web_address_for(dataset), { class: 'ga-contact'} ) %>
+          <%= content_tag(:p, class: "contact__source") do %>
+            <%= link_to(foi_web_address_for(dataset), foi_web_address_for(dataset), { class: 'ga-contact'}) %>
           <% end %>
         <% end %>
-
-      </p>
-    </div>
-  <% end %>
+      </div>
+    <% end %>
+  </div>
 </section>

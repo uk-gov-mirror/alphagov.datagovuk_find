@@ -381,18 +381,16 @@ span.showHide-open-all {
 
 // contact______
 .contact {
-  .column-one-half {
-    padding-left: 0;
-    span {
-      display: block;
-      word-wrap: break-word;
-    }
-    h3 {
-      padding-bottom: 8px;
-    }
-    &.foi {
-      padding-right: 0;
-    }
+  &__section {
+    margin-bottom: 20px;
+  }
+  
+  &__heading {
+    margin-bottom: 5px;
+  }
+
+  &__source {
+    word-wrap: break-word;
   }
 }
 
