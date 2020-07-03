@@ -73,36 +73,41 @@
   }
 }
 
-.dgu-metadata__box {
+.dgu-metadata {
+  &__box {
+    &--in-dataset {
+      background: $highlight-colour;
+      padding: 25px 30px 15px 30px;
+    }
+  
+    margin-top: 5px;
+    margin-bottom: 10px;
+    dt, dd {
+      display: inline-block;
+      margin-bottom: 5px;
+      vertical-align: text-top;
+    }
+    dt {
+      width: 30%;
+      font-weight: bold;
+      white-space: nowrap;
+      margin-right: 5px;
+    }
+    dd {
+      width: 60%;
+    }
+  
+    @include media(mobile) {
+      dt,dd {
+        width: 100%;
+      }
+    }
 
-  &--in-dataset {
-    background: $highlight-colour;
-    padding: 25px 30px 15px 30px;
-  }
-
-  margin-top: 5px;
-  margin-bottom: 10px;
-  dt, dd {
-    display: inline-block;
-    margin-bottom: 5px;
-    vertical-align: text-top;
-  }
-  dt {
-    width: 30%;
-    font-weight: bold;
-    white-space: nowrap;
-    margin-right: 5px;
-  }
-  dd {
-    width: 60%;
-  }
-
-  @include media(mobile) {
-    dt,dd {
-      width: 100%;
+    &__summary {
+      line-height: 1.5em;
+      overflow: hidden;
     }
   }
-
 }
 
 // pagination controls =========================================================
@@ -232,21 +237,8 @@
 // =============================================================================
 
 .dgu-dataset-right {
-  padding-left: 25px;
-  &__sidebar {
-    ul li {
-      margin-bottom: 10px;
-    }
-
-    &__publisher_datasets {
-      h3 {
-        margin: 0;
-      }
-
-    }
-  }
-  @include media(mobile) {
-    padding-left: 15px;
+  &__heading {
+    margin-bottom: 5px;
   }
 }
 
@@ -380,11 +372,11 @@ span.showHide-open-all {
 
 
 // contact______
-.contact {
+.dgu-contact {
   &__section {
     margin-bottom: 20px;
   }
-  
+
   &__heading {
     margin-bottom: 5px;
   }

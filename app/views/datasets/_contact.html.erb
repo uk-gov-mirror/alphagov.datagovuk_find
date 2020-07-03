@@ -5,32 +5,32 @@
     mail = link_to(contact_email_for(dataset), contact_email_for(dataset), {'data-ga-event': 'contact', 'data-ga-publisher': @dataset.organisation.name, class: 'govuk_link'})
   end
 %>
-<section class="contact">
+<section class="dgu-contact">
   <h2 class="govuk-heading-m">
     <%= t('datasets.contact.contact') %>
   </h2>
 
   <div class="govuk-grid-row">
     <% if contact_email_exists?(dataset) %>
-      <div class="govuk-grid-column-one-half contact__section">
-        <h3 class="govuk-heading-s contact__heading">
+      <div class="govuk-grid-column-one-half dgu-contact__section">
+        <h3 class="govuk-heading-s dgu-contact__heading">
           <%= t('datasets.contact.enquiries') %>
         </h3>
-        <%= content_tag(:p, contact_name_for(dataset), class: "contact__source") if contact_name_for(dataset).present? %>
-        <%= content_tag(:p, mail, class: "contact__source") if mail.present? %>
+        <%= content_tag(:p, contact_name_for(dataset), class: "dgu-contact__source") if contact_name_for(dataset).present? %>
+        <%= content_tag(:p, mail, class: "dgu-contact__source") if mail.present? %>
       </div>
     <% end %>
 
     <% if foi_details_exist?(dataset) %>
-      <div class="govuk-grid-column-one-half contact__section">
-        <h3 class="govuk-heading-s contact__heading">
+      <div class="govuk-grid-column-one-half dgu-contact__section">
+        <h3 class="govuk-heading-s dgu-contact__heading">
           <%= t('datasets.contact.foi_requests') %>
         </h3>
 
-        <%= content_tag(:p, foi_name_for(dataset), class: "contact__source") if foi_name_for(dataset).present? %>
-        <%= content_tag(:p, mail_to(foi_email_for(dataset), nil, {class: 'ga-contact'}), class: "contact__source") if foi_email_for(dataset).present? %>
+        <%= content_tag(:p, foi_name_for(dataset), class: "dgu-contact__source") if foi_name_for(dataset).present? %>
+        <%= content_tag(:p, mail_to(foi_email_for(dataset), nil, {class: 'ga-contact'}), class: "dgu-contact__source") if foi_email_for(dataset).present? %>
         <% if foi_web_address_for(dataset).present? %>
-          <%= content_tag(:p, class: "contact__source") do %>
+          <%= content_tag(:p, class: "dgu-contact__source") do %>
             <%= link_to(foi_web_address_for(dataset), foi_web_address_for(dataset), { class: 'ga-contact'}) %>
           <% end %>
         <% end %>

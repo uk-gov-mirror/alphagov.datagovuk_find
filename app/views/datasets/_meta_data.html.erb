@@ -11,7 +11,7 @@
 <section class="meta-data">
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <h1 class="heading-large" property="dc:title">
+      <h1 class="govuk-heading-l" property="dc:title">
         <%= unescape(@dataset.title) %>
       </h1>
     </div>
@@ -20,7 +20,7 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <div class="dgu-metadata__box dgu-metadata__box--in-dataset">
-        <dl class="metadata">
+        <dl>
           <% unless @dataset.released %>
             <dt><%= t('.availability') %>:</dt>
             <dd>
@@ -69,37 +69,35 @@
           </dd>
         </dl>
 
-        <h3 class="heading-small">
+        <h3 class="govuk-heading-s">
           <%= t('.summary') %>
         </h3>
-        <div class="js-summary" style="line-height: 1.5em; overflow: hidden" property="dc:description">
+        <div class="js-summary dgu-metadata__summary" property="dc:description">
           <%= to_markdown(@dataset.summary) %>
         </div>
       </div>
     </div>
 
     <div class="govuk-grid-column-one-third dgu-dataset-right">
-      <div class="dgu-dataset-right__sidebar__publisher_datasets">
-        <h3 class="heading-small"><%= t('.publisher_datasets') %></h3>
+      <h3 class="govuk-heading-s dgu-dataset-right__heading"><%= t('.publisher_datasets') %></h3>
+      <p class="govuk-body">
         <%= link_to search_path(filters: { publisher: @dataset.organisation.title }), class: 'govuk-link' do %>
           <%= "All datasets from #{@dataset.organisation.title}" %>
         <% end %>
-      </div>
+      </p>
 
       <% unless @related_datasets.empty? %>
-        <div class="dgu-dataset-right__sidebar">
-          <h3 class="heading-small"><%= t('.related_datasets') %></h3>
-          <ul>
-            <% @related_datasets.each do |dataset| %>
-              <li>
-                <%= link_to unescape(dataset.title), dataset_path(dataset.uuid, dataset.name), class: 'govuk-link' %>
-              </li>
-            <% end %>
-          </ul>
-        </div>
+        <h3 class="govuk-heading-s dgu-dataset-right__heading"><%= t('.related_datasets') %></h3>
+        <ul class="govuk-list">
+          <% @related_datasets.each do |dataset| %>
+            <li>
+              <%= link_to unescape(dataset.title), dataset_path(dataset.uuid, dataset.name), class: 'govuk-link' %>
+            </li>
+          <% end %>
+        </ul>
       <% end %>
 
-      <h3 class="heading-small"><%= t('.search_gov_data') %></h3>
+      <h3 class="govuk-heading-s dgu-dataset-right__heading"><%= t('.search_gov_data') %></h3>
       <form action="/search" method="GET" class="dgu-search-box">
         <label for="q" class="govuk-visually-hidden"><%= t('.accessibility.search_box_label') %></label>
         <input id="q"
