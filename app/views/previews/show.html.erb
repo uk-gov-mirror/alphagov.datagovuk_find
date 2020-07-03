@@ -2,7 +2,7 @@
 
 <main role="main" id="content">
   <div class="govuk-grid-row">
-    <div class="column-two-thirds">
+    <div class="govuk-grid-column-two-thirds">
       <%= link_to t('.back_link'), dataset_path(@dataset.uuid, @dataset.name), class: 'link-back govuk-link' %>
       <h1 class="heading-large">
         <%= @dataset.title %>
@@ -24,7 +24,7 @@
           <%= link_to "View the full organogram", "#organogram", class: "button" %>
         <% end %>
     </div>
-    <div class = 'column-full'>
+    <div class ="govuk-grid-column-full">
       <section class="dgu-datafile-preview">
         <div class="dgu-datafile-preview__inner">
           <table>

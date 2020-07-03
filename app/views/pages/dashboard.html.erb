@@ -4,21 +4,21 @@
   <h1 class="heading-large">Datasets stats</h1>
 
   <div class="govuk-grid-row">
-    <div class="column-one-third">
+    <div class="govuk-grid-column-one-third">
       <div class="data">
         <span class="data-item bold-xlarge"><%= number_with_delimiter(@datasets_count) %></span>
         <span class="data-item bold-xsmall"><%= 'dataset'.pluralize(@datasets_count) %> in total</span>
       </div>
     </div>
 
-    <div class="column-one-third">
+    <div class="govuk-grid-column-one-third">
       <div class="data">
         <span class="data-item bold-xlarge"><%= number_with_delimiter(@datasets_published_with_datafiles_count) %></span>
         <span class="data-item bold-xsmall"><%= 'dataset'.pluralize(@datasets_published_with_datafiles_count) %> published with datafiles</span>
       </div>
     </div>
 
-    <div class="column-one-third">
+    <div class="govuk-grid-column-one-third">
       <div class="data">
         <span class="data-item bold-xlarge"><%= number_with_delimiter(@datasets_published_with_no_datafiles_count) %></span>
         <span class="data-item bold-xsmall"><%= 'dataset'.pluralize(@datasets_published_with_no_datafiles_count) %> published with no datafiles</span>
@@ -27,14 +27,14 @@
   </div>
 
   <div class="govuk-grid-row">
-    <div class="column-one-third">
+    <div class="govuk-grid-column-one-third">
       <div class="data">
         <span class="data-item bold-xlarge"><%= number_with_delimiter(@datafiles_count) %></span>
         <span class="data-item bold-xsmall"><%= 'datafile'.pluralize(@datafiles_count) %> in total</span>
       </div>
     </div>
 
-    <div class="column-one-third">
+    <div class="govuk-grid-column-one-third">
       <div class="data">
         <span class="data-item bold-xlarge"><%= number_with_delimiter(@publishers_count) %></span>
         <span class="data-item bold-xsmall"><%= 'publisher'.pluralize(@publishers_count) %></span>
@@ -45,7 +45,7 @@
   <hr />
 
   <div class="govuk-grid-row">
-    <div class="column-one-half">
+    <div class="govuk-grid-column-one-half">
       <table>
         <caption class="heading-small">Datafile count by format</caption>
         <tbody>

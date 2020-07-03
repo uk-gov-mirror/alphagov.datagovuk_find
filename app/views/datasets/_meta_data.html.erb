@@ -10,7 +10,7 @@
 
 <section class="meta-data">
   <div class="govuk-grid-row">
-    <div class="column-two-thirds">
+    <div class="govuk-grid-column-two-thirds">
       <h1 class="heading-large" property="dc:title">
         <%= unescape(@dataset.title) %>
       </h1>
@@ -18,7 +18,7 @@
   </div>
 
   <div class="govuk-grid-row">
-    <div class="column-two-thirds">
+    <div class="govuk-grid-column-two-thirds">
       <div class="dgu-metadata__box dgu-metadata__box--in-dataset">
         <dl class="metadata">
           <% unless @dataset.released %>
@@ -78,7 +78,7 @@
       </div>
     </div>
 
-    <div class="column-one-third dgu-dataset-right">
+    <div class="govuk-grid-column-one-third dgu-dataset-right">
       <div class="dgu-dataset-right__sidebar__publisher_datasets">
         <h3 class="heading-small"><%= t('.publisher_datasets') %></h3>
         <%= link_to search_path(filters: { publisher: @dataset.organisation.title }), class: 'govuk-link' do %>
